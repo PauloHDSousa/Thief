@@ -109,48 +109,48 @@ public class PlayerSkills : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Hidden Wall
-        if (hiddenWallCountDownUI >= 1)
-        {
-            hiddenWallCountDownUI -= Time.deltaTime;
-            TimeSpan CDtime = TimeSpan.FromSeconds(hiddenWallCountDownUI);
-            hiddenWallCDText.text = CDtime.ToString(@"ss");
-        }
-        else
-        {
-            hiddenWallSkillIcon.color = IconNormalColor;
-            hiddenWallCDText.text = "";
-            hiddenWallCountDownUI = 0;
-        }
+        ////Hidden Wall
+        //if (hiddenWallCountDownUI >= 1)
+        //{
+        //    hiddenWallCountDownUI -= Time.deltaTime;
+        //    TimeSpan CDtime = TimeSpan.FromSeconds(hiddenWallCountDownUI);
+        //    hiddenWallCDText.text = CDtime.ToString(@"ss");
+        //}
+        //else
+        //{
+        //    hiddenWallSkillIcon.color = IconNormalColor;
+        //    hiddenWallCDText.text = "";
+        //    hiddenWallCountDownUI = 0;
+        //}
 
-        //Turn Into Box
-        if (turnIntoBoxCountDownUI >= 1)
-        {
-            turnIntoBoxCountDownUI -= Time.deltaTime;
-            TimeSpan CDtime = TimeSpan.FromSeconds(turnIntoBoxCountDownUI);
-            turnIntoBoxCDText.text = CDtime.ToString(@"ss");
-        }
-        else
-        {
-            turnIntoBoxSkillIcon.color = IconNormalColor;
-            turnIntoBoxCDText.text = "";
-            turnIntoBoxCountDownUI = 0;
-        }
+        ////Turn Into Box
+        //if (turnIntoBoxCountDownUI >= 1)
+        //{
+        //    turnIntoBoxCountDownUI -= Time.deltaTime;
+        //    TimeSpan CDtime = TimeSpan.FromSeconds(turnIntoBoxCountDownUI);
+        //    turnIntoBoxCDText.text = CDtime.ToString(@"ss");
+        //}
+        //else
+        //{
+        //    turnIntoBoxSkillIcon.color = IconNormalColor;
+        //    turnIntoBoxCDText.text = "";
+        //    turnIntoBoxCountDownUI = 0;
+        //}
 
 
-        //Whistle
-        if (whistleCountDownUI >= 1)
-        {
-            whistleCountDownUI -= Time.deltaTime;
-            TimeSpan CDtime = TimeSpan.FromSeconds(whistleCountDownUI);
-            whistleCDText.text = CDtime.ToString(@"ss");
-        }
-        else
-        {
-            whistleSkillIcon.color = IconNormalColor;
-            whistleCDText.text = "";
-            whistleCountDownUI = 0;
-        }
+        ////Whistle
+        //if (whistleCountDownUI >= 1)
+        //{
+        //    whistleCountDownUI -= Time.deltaTime;
+        //    TimeSpan CDtime = TimeSpan.FromSeconds(whistleCountDownUI);
+        //    whistleCDText.text = CDtime.ToString(@"ss");
+        //}
+        //else
+        //{
+        //    whistleSkillIcon.color = IconNormalColor;
+        //    whistleCDText.text = "";
+        //    whistleCountDownUI = 0;
+        //}
 
     }
 
