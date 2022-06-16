@@ -1,18 +1,7 @@
 <div>
-  <h1 align="center">Oi Tudo bem? Eu sou o <a href="https://paulohdsousa.itch.io/"><i>Paulo Henrique</i></a></h1>
-  <p align="center">Estudo Desenvolvimento Web na <a href="https://www.betrybe.com/"><i>Trybe</i></a> e compartilho meu aprendizado no meu canal no <a href="https://www.youtube.com/channel/UCViaNBT0SIeiVnZSEEtIfjw?sub_confirmation=1"><i>YouTube</i></a><span> 👉🏽️</span>
-  <a align="rigth"  href="https://www.youtube.com/channel/UCViaNBT0SIeiVnZSEEtIfjw?sub_confirmation=1" target="_blank">
-    <img width="10%" align="center" valign="middle" src="https://img.shields.io/youtube/channel/subscribers/UCViaNBT0SIeiVnZSEEtIfjw?label=iCode&style=social  " target="_blank" />
-  </a><br>
-  <p align="center">Já se inscreve aí e vem codar comigo, tua contribuição será muito bem vinda, vlw mesmo! 😉️</h2>
+  <h1 align="center">Oi Tudo bem? Eu sou o <i>Paulo Henrique</i></a></h1>
+  <p align="center">Sou Desenvolvedor WEB na <a href="https://www.ef5.com.br/"><i>F5</i></a> e <a href="https://paulohdsousa.itch.io/">desenvolvedor de jogos</a> e <a href="https://play.google.com/store/apps/developer?id=PauloHDSousa"><i>aplicativos</i></a> nas horas vagas<span> 👉🏽️</span>
 </div>
-
-
-<!-- <h1 align="center"> 
-  Trybe
-</h1>
-
-<p align="center"><i>"A Trybe é uma escola do futuro para qualquer pessoa que deseja construir uma carreira de sucesso em tecnologia. Como estudante a pessoa ainda tem a opção de pagar os estudos apenas quando estiver formada e com um bom trabalho."</i></p> -->
 
 <div align="center">
   <a href="https://github.com/PauloHDSousa">
@@ -22,7 +11,7 @@
 </div>
 
 <div align="center" valign="top"><br>
-  <img align="center" alt="React" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg">
+  <img align="center" alt="React" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg">
   <img align="center" alt="Redux" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg">
   <img align="center" alt="Js" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg">
   <img align="center" alt="Js" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-plain.svg">
