@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23579725177664088}
   - component: {fileID: 65569984092380234}
   - component: {fileID: 54157987518180096}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: CarboardBox_1(Physics)
   m_TagString: PlayerBox
   m_Icon: {fileID: 0}
