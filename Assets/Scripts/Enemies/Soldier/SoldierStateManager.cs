@@ -26,6 +26,12 @@ public class SoldierStateManager : MonoBehaviour
     [SerializeField]
     public AudioClip sawThePlayer;
 
+    [SerializeField]
+    public AudioClip[] footsteps;
+
+    [SerializeField]
+    public AudioClip attack;
+
     [Space(10)]
     [Header("VFX")]
     [SerializeField]
@@ -123,8 +129,8 @@ public class SoldierStateManager : MonoBehaviour
 
         RaycastHit hit;
         Debug.DrawRay(transform.position, forward * range, Color.yellow);
-        int layerMask = 1 << 6;
-        if (Physics.Raycast(transform.position, forward, out hit, range, layerMask))
+
+        if (Physics.Raycast(transform.position, forward, out hit, range))
             if (tag.Contains(hit.transform.gameObject.tag))
                 return true;
 
@@ -153,16 +159,16 @@ public class SoldierStateManager : MonoBehaviour
             }
 
             //Forward
-            if (AnyHit(forwardAnglesUp, tag, range, layerMask))
+            if (AnyHit(forwardAnglesUp, tag, range))
                 return true;
-            if (AnyHit(forwardAnglesDown, tag, range, layerMask))
+            if (AnyHit(forwardAnglesDown, tag, range))
                 return true;
 
             //BACK
-            if (AnyHit(backwardsdAnglesUp, tag, rangeOfViewBehind, layerMask))
+            if (AnyHit(backwardsdAnglesUp, tag, rangeOfViewBehind))
                 return true;
 
-            if (AnyHit(backwardsdAnglesDown, tag, rangeOfViewBehind, layerMask))
+            if (AnyHit(backwardsdAnglesDown, tag, rangeOfViewBehind))
                 return true;
             i++;
         }
@@ -174,27 +180,27 @@ public class SoldierStateManager : MonoBehaviour
         var middleRight = (transform.right);
         var middleLeft = (-transform.right);
 
-        if (AnyHit(right, tag, rangeOfViewSideways, layerMask))
+        if (AnyHit(right, tag, rangeOfViewSideways))
             return true;
 
-        if (AnyHit(left, tag, rangeOfViewSideways, layerMask))
+        if (AnyHit(left, tag, rangeOfViewSideways))
             return true;
 
-        if (AnyHit(middleRight, tag, rangeOfViewSideways, layerMask))
+        if (AnyHit(middleRight, tag, rangeOfViewSideways))
             return true;
 
-        if (AnyHit(middleLeft, tag, rangeOfViewSideways, layerMask))
+        if (AnyHit(middleLeft, tag, rangeOfViewSideways))
             return true;
 
         return false;
     }
 
-    bool AnyHit(Vector3 dir, string[] tag, float distance, int layerMask)
+    bool AnyHit(Vector3 dir, string[] tag, float distance)
     {
 
         RaycastHit hit;
         Debug.DrawRay(transform.position, dir * distance, Color.red);
-        if (Physics.Raycast(transform.position, dir, out hit, distance, layerMask))
+        if (Physics.Raycast(transform.position, dir, out hit, distance))
             if (tag.Contains(hit.transform.gameObject.tag))
                 return true;
 
@@ -221,6 +227,22 @@ public class SoldierStateManager : MonoBehaviour
     public void Destroy(GameObject gameObject)
     {
         Destroy(gameObject);
+    }
+
+    public void Step()
+    {
+        AudioClip step = GetRandomStep();
+        audioSource.PlayOneShot(step);
+    }
+
+    public AudioClip GetRandomStep()
+    {
+        return footsteps[UnityEngine.Random.Range(0, footsteps.Length)];
+    }
+
+    public void Attack()
+    {
+        audioSource.PlayOneShot(attack);
     }
 
 }

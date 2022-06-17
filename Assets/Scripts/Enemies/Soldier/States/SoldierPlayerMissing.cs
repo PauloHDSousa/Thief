@@ -11,6 +11,7 @@ public class SoldierPlayerMissing : SoldierBaseState
         soldier.soldierAnim.SetPlayerIsMissing(true);
         soldier.soldierAnim.SetIsRunning(false);
         soldier.navMeshAgent.isStopped = true;
+        GameManager.Instance.StopRunSong();
     }
     public override void UpdateState(SoldierStateManager soldier)
     {

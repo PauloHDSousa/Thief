@@ -1292,7 +1292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eae1bdb41906774a9b8a8eb7a4b4de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 5
   steps:
   - {fileID: 8300000, guid: 4d11813f5983ce047873c94858e6a6c1, type: 3}
   - {fileID: 8300000, guid: 6154d2d90f91ac743a30a16a58f9fa32, type: 3}
@@ -1315,6 +1315,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c92fd58ac6b91794ba82b93ef3f4e00e, type: 3}
   - {fileID: 8300000, guid: a70895712392d4345be385abfae08f28, type: 3}
   - {fileID: 8300000, guid: b70d04f1f7e251b4f8629b271d71c623, type: 3}
+  die_sfxs:
+  - {fileID: 8300000, guid: 82b02a0c9f5ea2c48aa51b8536e7487e, type: 3}
+  - {fileID: 8300000, guid: e1d1f5b7419fe744ca3b507c6908237d, type: 3}
+  - {fileID: 8300000, guid: d4a12f3f6f76d9441916c4f1e5163fe6, type: 3}
+  - {fileID: 8300000, guid: 1feb69a52c032654183228cccf8cde76, type: 3}
 --- !u!114 &2404518641514851744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1327,6 +1332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0117c54c7dc6246bdf1a1f954088ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puffSFX: {fileID: 8300000, guid: 942794572bf808e488be7e63ddd1a6ba, type: 3}
+  unPuffSFX: {fileID: 8300000, guid: a56d18a88e307d74587cc7396689105a, type: 3}
   turnIntoBoxCD: 8
   boxModel: {fileID: 1192641458597302, guid: acbdb13218a23b644b2a15c0a6fbd3f7, type: 3}
   playerModels:
@@ -1335,6 +1342,8 @@ MonoBehaviour:
   puffEffect: {fileID: 19800000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
   turnIntoBoxCDText: {fileID: 0}
   turnIntoBoxSkillIcon: {fileID: 0}
+  revelWallSFX: {fileID: 8300000, guid: 8bb5efb551637024fa654d39fa7608b4, type: 3}
+  hideWallSFX: {fileID: 8300000, guid: 021007981a9985746a5173715bcd30c6, type: 3}
   showHiddenWallCD: 5
   hiddenWallMaterial: {fileID: 2100000, guid: bd5eeb2217e973b40845ba1e582cf28c, type: 2}
   hiddenWallCDText: {fileID: 0}
@@ -1418,7 +1427,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.09959635
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
