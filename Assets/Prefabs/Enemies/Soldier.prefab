@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 1469965050}
   m_Layer: 9
   m_Name: SwordHit
-  m_TagString: Untagged
+  m_TagString: Sword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1146,6 +1146,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sawThePlayer: {fileID: 8300000, guid: 6611047adba03d64ba8661201d5a8005, type: 3}
+  footsteps:
+  - {fileID: 8300000, guid: 9474ecb0297a2cb4fb5d57206d7cf920, type: 3}
+  - {fileID: 8300000, guid: 9c416ab0a0cb79640bee74c1f9bbc9c6, type: 3}
+  - {fileID: 8300000, guid: fc96714e934133449a4d432464cbffb0, type: 3}
+  - {fileID: 8300000, guid: f62954fb421e9a9439fc02349bfa0834, type: 3}
+  - {fileID: 8300000, guid: 20258d1d411a5dc4bb715a974d987b09, type: 3}
+  - {fileID: 8300000, guid: 9ad6bfc6b57a4d244ad683960b1d15f1, type: 3}
+  - {fileID: 8300000, guid: ea765fc549c22104382379b77ad5cdc8, type: 3}
+  - {fileID: 8300000, guid: 39c2f654ab61aa44e942eea8258411bb, type: 3}
+  attack: {fileID: 8300000, guid: 3a183d353531ef34fa55fd21c124e746, type: 3}
   vfxSawThePlayer: {fileID: 19800000, guid: 3156817f64ec68948ad6bb26569b9ef5, type: 3}
   playerMask:
     serializedVersion: 2
@@ -1160,7 +1170,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  moveSpeed: 2.8
+  moveSpeed: 2
   rangeOfView: 5
   rangeOfViewBehind: 2
   rangeOfViewSideways: 3
@@ -1254,10 +1264,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1.8839313
-  MaxDistance: 500
+  MinDistance: 1
+  MaxDistance: 25
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1290,7 +1300,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1353,8 +1363,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3055844589576586616}
-  m_LocalRotation: {x: 0.074331455, y: 0.45606756, z: -0.03014436, w: 0.88632303}
-  m_LocalPosition: {x: -0.03992182, y: 0.8056124, z: -0.03249832}
+  m_LocalRotation: {x: 0.07433146, y: 0.45606753, z: -0.030144364, w: 0.88632303}
+  m_LocalPosition: {x: -0.039922133, y: 0.8056124, z: -0.032496452}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 202914069740351267}
   - component: {fileID: 7664063440649902041}
   - component: {fileID: -945307053188176053}
+  - component: {fileID: 646614813}
   m_Layer: 0
   m_Name: Book2
-  m_TagString: Untagged
+  m_TagString: Stealable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,12 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5044538947598690129}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &202914069740351267
 MeshFilter:
@@ -96,3 +98,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.09658134, y: 0.38445747, z: 0.31421798}
   m_Center: {x: 0.00014890358, y: -0.000000007450581, z: -0.04875291}
+--- !u!114 &646614813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5044538947598690129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52442c6549fa06a4fa799f2804e7a944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemObject: {fileID: 11400000, guid: 0f9e41e8e59ede546a8ef083ae69be71, type: 2}

@@ -10,6 +10,13 @@ TagManager:
   - PlayerBox
   - FxTemporaire
   - Straw
+  - Enemy
+  - PlayerLastKnowPosition
+  - StrawVFXPosition
+  - Sword
+  - DeadPlayer
+  - StrawWithPlayer
+  - Stealable
   layers:
   - Default
   - TransparentFX

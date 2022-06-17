@@ -62,6 +62,24 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""24293672-0e7d-49f0-85d3-0998f085b0bf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Steal"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a03d804-5058-48d0-9392-21ee61c518a6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -163,6 +181,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Whistle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8d6477d9-2684-4098-a2d9-6c6d858ee24d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db15b456-1688-4876-904c-dbfc6740e78a"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -175,6 +215,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_CharacterController_TransformIntoBox = m_CharacterController.FindAction("TransformIntoBox", throwIfNotFound: true);
         m_CharacterController_ShowBehindWalls = m_CharacterController.FindAction("ShowBehindWalls", throwIfNotFound: true);
         m_CharacterController_Whistle = m_CharacterController.FindAction("Whistle", throwIfNotFound: true);
+        m_CharacterController_Pause = m_CharacterController.FindAction("Pause", throwIfNotFound: true);
+        m_CharacterController_Steal = m_CharacterController.FindAction("Steal", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -238,6 +280,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterController_TransformIntoBox;
     private readonly InputAction m_CharacterController_ShowBehindWalls;
     private readonly InputAction m_CharacterController_Whistle;
+    private readonly InputAction m_CharacterController_Pause;
+    private readonly InputAction m_CharacterController_Steal;
     public struct CharacterControllerActions
     {
         private @PlayerInput m_Wrapper;
@@ -246,6 +290,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @TransformIntoBox => m_Wrapper.m_CharacterController_TransformIntoBox;
         public InputAction @ShowBehindWalls => m_Wrapper.m_CharacterController_ShowBehindWalls;
         public InputAction @Whistle => m_Wrapper.m_CharacterController_Whistle;
+        public InputAction @Pause => m_Wrapper.m_CharacterController_Pause;
+        public InputAction @Steal => m_Wrapper.m_CharacterController_Steal;
         public InputActionMap Get() { return m_Wrapper.m_CharacterController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -267,6 +313,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Whistle.started -= m_Wrapper.m_CharacterControllerActionsCallbackInterface.OnWhistle;
                 @Whistle.performed -= m_Wrapper.m_CharacterControllerActionsCallbackInterface.OnWhistle;
                 @Whistle.canceled -= m_Wrapper.m_CharacterControllerActionsCallbackInterface.OnWhistle;
+                @Pause.started -= m_Wrapper.m_CharacterControllerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_CharacterControllerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_CharacterControllerActionsCallbackInterface.OnPause;
+                @Steal.started -= m_Wrapper.m_CharacterControllerActionsCallbackInterface.OnSteal;
+                @Steal.performed -= m_Wrapper.m_CharacterControllerActionsCallbackInterface.OnSteal;
+                @Steal.canceled -= m_Wrapper.m_CharacterControllerActionsCallbackInterface.OnSteal;
             }
             m_Wrapper.m_CharacterControllerActionsCallbackInterface = instance;
             if (instance != null)
@@ -283,6 +335,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Whistle.started += instance.OnWhistle;
                 @Whistle.performed += instance.OnWhistle;
                 @Whistle.canceled += instance.OnWhistle;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+                @Steal.started += instance.OnSteal;
+                @Steal.performed += instance.OnSteal;
+                @Steal.canceled += instance.OnSteal;
             }
         }
     }
@@ -293,5 +351,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnTransformIntoBox(InputAction.CallbackContext context);
         void OnShowBehindWalls(InputAction.CallbackContext context);
         void OnWhistle(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+        void OnSteal(InputAction.CallbackContext context);
     }
 }

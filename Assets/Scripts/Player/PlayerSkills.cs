@@ -8,6 +8,11 @@ public class PlayerSkills : MonoBehaviour
 {
     [Space(10)]
     [Header("Turn Into Box Skill")]
+    [SerializeField]
+    AudioClip puffSFX;
+
+    [SerializeField]
+    AudioClip unPuffSFX;
 
     [SerializeField]
     float turnIntoBoxCD = 8f;
@@ -33,6 +38,13 @@ public class PlayerSkills : MonoBehaviour
 
     [Space(10)]
     [Header("Show Behind Walls Skill")]
+
+    [SerializeField]
+    AudioClip revelWallSFX;
+
+
+    [SerializeField]
+    AudioClip hideWallSFX;
 
     [SerializeField]
     float showHiddenWallCD = 6f;
@@ -160,6 +172,8 @@ public class PlayerSkills : MonoBehaviour
         if (hiddenWallCountDownUI > 0)
             return;
 
+
+        audioSource.PlayOneShot(revelWallSFX);
         var walls = GameObject.FindGameObjectsWithTag("HiddenWalls");
 
         foreach (GameObject wall in walls)
@@ -173,6 +187,7 @@ public class PlayerSkills : MonoBehaviour
     {
         yield return new WaitForSeconds(secs);
 
+        audioSource.PlayOneShot(hideWallSFX);
         var walls = GameObject.FindGameObjectsWithTag("HiddenWalls");
         foreach (GameObject wall in walls)
         {
@@ -198,6 +213,7 @@ public class PlayerSkills : MonoBehaviour
         foreach (GameObject model in playerModels)
             model.SetActive(false);
 
+        audioSource.PlayOneShot(puffSFX);
         Instantiate(puffEffect, transform);
         instantiatedBoxModel = Instantiate(boxModel, transform);
     }
@@ -211,6 +227,7 @@ public class PlayerSkills : MonoBehaviour
         collider.enabled = true;
         rb.isKinematic = false;
 
+        audioSource.PlayOneShot(unPuffSFX);
         Instantiate(puffEffect, transform);
 
         foreach (GameObject model in playerModels)
@@ -237,17 +254,17 @@ public class PlayerSkills : MonoBehaviour
     {
         if (whistleCountDownUI > 0)
             return;
+
         Instantiate(whistleEffect, transform);
-
-        GameObject soundPosition = Instantiate(lastKnowPosition, transform.position, Quaternion.identity);
-        Instantiate(soundPosition, soundPosition.transform, true);
-
         audioSource.PlayOneShot(whistleSound);
         playerAnimController.Whistle();
 
+        //Create a sound position object to guards to follow
+        GameObject soundPosition = Instantiate(lastKnowPosition, transform.position, Quaternion.identity);
+        Instantiate(soundPosition, soundPosition.transform, true);
+
         whistleSkillIcon.color = IconCDColor;
         whistleCountDownUI = whistleCD; ;
-
     }
 
 

@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,9 +24,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     AudioClip[] steps;
 
+    [Space(10)]
+    [Header("SFX")]
+    [SerializeField]
+    AudioClip[] die_sfxs;
+
     //Straw
     GameObject strawRef;
     AudioSource audioSource;
+
+    List<GameObject> stolenObjects = new List<GameObject>();
+
+    //Whistle
+    bool isUsingSkill = false;
+    bool isDead = false;
+    bool canSteal = false;
+
+    float currentWeight = 0f;
+    GameObject currentItemToSteal;
     #region Input Actions
 
     void OnGUI()
@@ -45,12 +61,14 @@ public class PlayerController : MonoBehaviour
 
         playerInput.CharacterController.ShowBehindWalls.performed += onShowBehindWalls;
         playerInput.CharacterController.Whistle.performed += onWhistle;
-
+        playerInput.CharacterController.Steal.performed += onSteal;
 
         playerInput.CharacterController.TransformIntoBox.started += onTransformIntoBox;
         playerInput.CharacterController.TransformIntoBox.canceled += goBackToHumanForm;
+        playerInput.CharacterController.Pause.performed += onPause;
 
     }
+
     private void OnEnable()
     {
         playerInput.CharacterController.Enable();
@@ -61,18 +79,58 @@ public class PlayerController : MonoBehaviour
         playerInput.CharacterController.Disable();
     }
 
+    void onPause(InputAction.CallbackContext ctx)
+    {
+        GameManager.Instance.ShowMenu();
+    }
+
+    void onSteal(InputAction.CallbackContext ctx)
+    {
+        if (canSteal)
+        {
+            canSteal = false;
+            isUsingSkill = true;
+            if (currentItemToSteal != null)
+            {
+                Vector3 objectPosition = new Vector3(currentItemToSteal.gameObject.transform.position.x, 0, currentItemToSteal.gameObject.transform.position.z);
+                transform.LookAt(objectPosition);
+                animController.Steal();
+            }
+        }
+    }
+
+    public void StealItemDuringAnimation()
+    {
+        var item = currentItemToSteal.GetComponent<StealableItem>();
+
+        stolenObjects.Add(currentItemToSteal);
+
+        Destroy(currentItemToSteal);
+        GameManager.Instance.AddWeightOnBar(item.Weight);
+        GameManager.Instance.AddGoldValue(item.PriceValue);
+        isUsingSkill = false;
+    }
+
     void onWhistle(InputAction.CallbackContext ctx)
     {
+        isUsingSkill = true;
         playerSkills.OnWhistle();
+    }
+
+    void onWhistleFinished()
+    {
+        isUsingSkill = false;
     }
 
     void onTransformIntoBox(InputAction.CallbackContext ctx)
     {
+        isUsingSkill = true;
         playerSkills.onTransformIntoBox(playerCapsuleCollider, rb);
     }
 
     void goBackToHumanForm(InputAction.CallbackContext ctx)
     {
+        isUsingSkill = false;
         playerSkills.GoBackToHumanForm(playerCapsuleCollider, rb);
     }
 
@@ -96,8 +154,24 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    private void Update()
+    {
+        var colliders =  Physics.OverlapSphere(transform.position, 1.5f);
+        foreach(var hit in colliders)
+        {
+            if (hit.transform.gameObject.tag == "Stealable")
+            {
+                currentItemToSteal = hit.transform.gameObject;
+                canSteal = true;
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
+        if (isUsingSkill)
+            return;
+
         if (isMovementPressed)
         {
             var direction = new Vector3(currentMovementInput.x, 0, currentMovementInput.y);
@@ -115,7 +189,7 @@ public class PlayerController : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 2f);
+        Gizmos.DrawWireSphere(transform.position, 1.5f);
     }
 
     void HandleAnimations()
@@ -128,6 +202,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Straw"))
         {
             strawRef = other.gameObject;
+            this.gameObject.tag = "StrawWithPlayer";
             strawRef.tag = "StrawWithPlayer";
             playerSkills.OnInteractWithStraw(strawRef);
         }
@@ -136,12 +211,31 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("StrawWithPlayer"))
         {
+            this.gameObject.tag = "Player";
             other.tag = "Straw";
             playerSkills.OnInteractWithStraw(strawRef);
             strawRef = null;
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "Sword")
+            Die();
+    }
+    public void Die()
+    {
+        if (isDead)
+            return;
+
+        isDead = true;
+        AudioClip die_sfx = GetRandomDeathSound();
+        audioSource.PlayOneShot(die_sfx);
+        animController.Die();
+        this.gameObject.tag = "DeadPlayer";
+        playerInput.CharacterController.Disable();
+        GameManager.Instance.ShowMenu();
+    }
 
     public void Step()
     {
@@ -152,6 +246,11 @@ public class PlayerController : MonoBehaviour
     public AudioClip GetRandomStep()
     {
         return steps[UnityEngine.Random.Range(0, steps.Length)];
+    }
+
+    public AudioClip GetRandomDeathSound()
+    {
+        return die_sfxs[UnityEngine.Random.Range(0, die_sfxs.Length)];
     }
 
 }

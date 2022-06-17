@@ -8,6 +8,7 @@ public class SoldierAnimController : MonoBehaviour
 
     int isWalkingHash;
     int IsRunningHash;
+    int Attack;
     int SawPlayerHash;
     int MissingPlayerHash;
 
@@ -18,6 +19,7 @@ public class SoldierAnimController : MonoBehaviour
         IsRunningHash = Animator.StringToHash("IsRunning");
         MissingPlayerHash = Animator.StringToHash("IsMissing");
         SawPlayerHash = Animator.StringToHash("SawPlayer");
+        Attack = Animator.StringToHash("Attack");
     }
 
     public void SetIsWalking(bool isWalking)
@@ -38,6 +40,11 @@ public class SoldierAnimController : MonoBehaviour
     public void SetPlayerIsMissing(bool isMissing)
     {
         animator.SetBool(MissingPlayerHash, isMissing);
+    }
+
+    public void SetAttack(bool attack)
+    {
+        animator.SetBool(Attack, attack);
     }
 
 }

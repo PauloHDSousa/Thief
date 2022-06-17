@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimController : MonoBehaviour
@@ -14,11 +12,6 @@ public class PlayerAnimController : MonoBehaviour
         isWalkingHash = Animator.StringToHash("IsWalking");
     }
 
-    void Start()
-    {
-
-    }
-
     public void SetIsWalking(bool isWalking)
     {
         animator.SetBool(isWalkingHash, isWalking);
@@ -27,5 +20,14 @@ public class PlayerAnimController : MonoBehaviour
     public void Whistle()
     {
         animator.SetTrigger("Whistle");
+    }
+
+    public void Die()
+    {
+        animator.SetTrigger("Die");
+    }
+    public void Steal()
+    {
+        animator.SetTrigger("PickUp");
     }
 }
