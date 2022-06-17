@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
+using System;
 
 public class SoldierStateManager : MonoBehaviour
 {
@@ -109,7 +110,11 @@ public class SoldierStateManager : MonoBehaviour
     public bool CheckIfLayerAhead(float range, string[] tag)
     {
 
-        Vector3 forward = transform.forward;
+        Vector3 posA = transform.position;
+        Vector3 posB = navMeshAgent.destination;
+        Vector3 dir = (posB - posA).normalized;
+
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 forwardAnglesUp = forward;
         Vector3 forwardAnglesDown = forward;
 
@@ -117,19 +122,20 @@ public class SoldierStateManager : MonoBehaviour
         Vector3 backwardsdAnglesDown = -forward;
 
         RaycastHit hit;
-
         Debug.DrawRay(transform.position, forward * range, Color.yellow);
-        if (Physics.Raycast(transform.position, forward * range, out hit))
+        int layerMask = 1 << 6;
+        if (Physics.Raycast(transform.position, forward, out hit, range, layerMask))
             if (tag.Contains(hit.transform.gameObject.tag))
                 return true;
 
         int i = 0;
-        forward.y = 0;
-        float headingAngle = Quaternion.LookRotation(forward).eulerAngles.y;
+        double z = Math.Round(dir.z);
 
         while (i < numberOfAdditionalRC)
         {
-            if (headingAngle > 180f)
+
+            //Going Down
+            if (z == 1 || z == -1)
             {
                 forwardAnglesUp.x += 0.1f;
                 forwardAnglesDown.x -= 0.1f;
@@ -144,57 +150,53 @@ public class SoldierStateManager : MonoBehaviour
 
                 backwardsdAnglesUp.z += 0.1f;
                 backwardsdAnglesDown.z -= 0.1f;
-
             }
 
             //Forward
-            if (AnyHit(forwardAnglesUp * range, tag, rangeOfViewBehind))
+            if (AnyHit(forwardAnglesUp, tag, range, layerMask))
                 return true;
-            if (AnyHit(forwardAnglesDown * range, tag, rangeOfViewBehind))
+            if (AnyHit(forwardAnglesDown, tag, range, layerMask))
                 return true;
 
             //BACK
-            if (AnyHit(backwardsdAnglesUp * rangeOfViewBehind, tag, rangeOfViewBehind))
+            if (AnyHit(backwardsdAnglesUp, tag, rangeOfViewBehind, layerMask))
                 return true;
 
-            if (AnyHit(backwardsdAnglesDown * rangeOfViewBehind, tag, rangeOfViewBehind))
+            if (AnyHit(backwardsdAnglesDown, tag, rangeOfViewBehind, layerMask))
                 return true;
             i++;
         }
 
-        //float sideRange = range / 5;
         //Left - Right
-        var right = (transform.forward + transform.right).normalized;
-        var left = (transform.forward - transform.right).normalized;
+        var right = (transform.forward + transform.right);
+        var left = (transform.forward - transform.right);
 
-        if (AnyHit(right * rangeOfViewSideways, tag, rangeOfViewSideways))
+        var middleRight = (transform.right);
+        var middleLeft = (-transform.right);
+
+        if (AnyHit(right, tag, rangeOfViewSideways, layerMask))
             return true;
 
-        if (AnyHit(left * rangeOfViewSideways, tag, rangeOfViewSideways))
+        if (AnyHit(left, tag, rangeOfViewSideways, layerMask))
             return true;
 
-        if (AnyHit(transform.right.normalized * rangeOfViewSideways, tag, rangeOfViewSideways))
+        if (AnyHit(middleRight, tag, rangeOfViewSideways, layerMask))
             return true;
 
-        if (AnyHit(-transform.right.normalized * rangeOfViewSideways, tag, rangeOfViewSideways))
+        if (AnyHit(middleLeft, tag, rangeOfViewSideways, layerMask))
             return true;
 
         return false;
     }
 
-    bool AnyHit(Vector3 dir, string[] tag, float distance)
+    bool AnyHit(Vector3 dir, string[] tag, float distance, int layerMask)
     {
 
         RaycastHit hit;
-        Debug.DrawRay(transform.position, dir, Color.red);
-        if (Physics.Raycast(transform.position, dir, out hit, distance))
-        {
+        Debug.DrawRay(transform.position, dir * distance, Color.red);
+        if (Physics.Raycast(transform.position, dir, out hit, distance, layerMask))
             if (tag.Contains(hit.transform.gameObject.tag))
-            {
-                Debug.Log("Hit" + hit.transform.gameObject + " with: " + dir);
                 return true;
-            }
-        }
 
         return false;
     }

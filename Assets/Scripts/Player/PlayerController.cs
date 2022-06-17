@@ -129,7 +129,6 @@ public class PlayerController : MonoBehaviour
         {
             strawRef = other.gameObject;
             strawRef.tag = "StrawWithPlayer";
-            strawRef = other.gameObject;
             playerSkills.OnInteractWithStraw(strawRef);
         }
     }
