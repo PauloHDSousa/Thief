@@ -16,50 +16,105 @@ public class GameManager : MonoBehaviour
     TextMeshProUGUI timerText;
     [SerializeField]
     TextMeshProUGUI goldText;
-    [SerializeField]
-    GameObject weightBar;
 
+    [SerializeField]
+    GameObject panelExitMap;
 
     [SerializeField]
     GameObject panelGameOver;
+
     [Header("Songs")]
     [SerializeField]
     AudioSource emergencyAudioPlayer;
+
+    [SerializeField]
+    AudioClip showMenuSFX;
 
     [SerializeField]
     AudioClip mainSong;
     [SerializeField]
     AudioClip runSong;
 
+    [Space(10)]
+    [Header("UI Texts")]
+    [SerializeField]
+    TextMeshProUGUI mapTimeText;
+    [SerializeField]
+    TextMeshProUGUI timesSeenByGuardsText;
+    [SerializeField]
+    TextMeshProUGUI itensStolenText;
+    [SerializeField]
+    TextMeshProUGUI totalGoldStolenText;
 
+
+    AudioSource audioSource;
+    string currentLevel;
     bool runSongIsPlaying = false;
+
+    public int timesPLayerSeenByGuards = 0;
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-            Destroy(gameObject);
-        else
-            Instance = this;
-
-        DontDestroyOnLoad(gameObject);
+        Instance = this;
     }
 
+    public bool isPaused = false;
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        currentLevel = SceneManager.GetActiveScene().name;
+    }
 
     void Update()
     {
+        if (isPaused)
+            return;
+
         currentTime = currentTime + Time.deltaTime;
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
-        timerText.text = time.ToString(@"mm\:ss\:ff");
+        timerText.text = time.ToString(@"mm\:ss");
     }
 
     #region MENU/PAUSE
     public void ShowMenu()
     {
-        panelGameOver.SetActive(true);
+        TogglePause();
+
+        audioSource.PlayOneShot(showMenuSFX);
+        panelGameOver.SetActive(isPaused);
+    }
+
+    void TogglePause()
+    {
+        isPaused = !isPaused;
+        if (isPaused)
+            Time.timeScale = 0f;
+        else
+            Time.timeScale = 1f;
     }
 
     public void ResetLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(currentLevel);
+    }
+
+    public void OnExit()
+    {
+        mapTimeText.text = "";
+        timesSeenByGuardsText.text = "";
+        itensStolenText.text = "";
+        totalGoldStolenText.text = "";
+
+
+        audioSource.PlayOneShot(showMenuSFX);
+        panelExitMap.SetActive(true);
+    }
+
+    public void GoToNextLevel()
+    {
+        if (currentLevel == "Tutorial")
+            currentLevel = "1-Map";
+
+        SceneManager.LoadScene(currentLevel);
     }
     #endregion
 
@@ -83,11 +138,11 @@ public class GameManager : MonoBehaviour
     #region UI
     public void AddWeightOnBar(float weight)
     {
-        if (weightBar.transform.localScale.x >= 1)
-            return;
+        //if (weightBar.transform.localScale.x >= 1)
+        //    return;
 
-        float nexWeight = weightBar.transform.localScale.x + weight;
-        LeanTween.scaleX(weightBar, nexWeight, .6f);
+        //float nexWeight = weightBar.transform.localScale.x + weight;
+        //LeanTween.scaleX(weightBar, nexWeight, .6f);
     }
 
     public void AddGoldValue(int gold)

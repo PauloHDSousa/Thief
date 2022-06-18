@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoldierFollow : SoldierBaseState
@@ -7,6 +5,7 @@ public class SoldierFollow : SoldierBaseState
 
     public override void EnterState(SoldierStateManager soldier)
     {
+        GameManager.Instance.timesPLayerSeenByGuards++;
         soldier.navMeshAgent.isStopped = false;
         soldier.soldierAnim.SetIsRunning(true);
         soldier.soldierAnim.SetPlayerIsMissing(false);
