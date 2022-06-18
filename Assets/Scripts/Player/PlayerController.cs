@@ -33,14 +33,13 @@ public class PlayerController : MonoBehaviour
     GameObject strawRef;
     AudioSource audioSource;
 
-    List<GameObject> stolenObjects = new List<GameObject>();
-
     //Whistle
     bool isUsingSkill = false;
     bool isDead = false;
-    bool canSteal = false;
 
-    float currentWeight = 0f;
+
+    //Steal
+    bool canSteal = false;
     GameObject currentItemToSteal;
     #region Input Actions
 
@@ -89,9 +88,9 @@ public class PlayerController : MonoBehaviour
         if (canSteal)
         {
             canSteal = false;
-            isUsingSkill = true;
             if (currentItemToSteal != null)
             {
+                isUsingSkill = true;
                 Vector3 objectPosition = new Vector3(currentItemToSteal.gameObject.transform.position.x, 0, currentItemToSteal.gameObject.transform.position.z);
                 transform.LookAt(objectPosition);
                 animController.Steal();
@@ -102,9 +101,6 @@ public class PlayerController : MonoBehaviour
     public void StealItemDuringAnimation()
     {
         var item = currentItemToSteal.GetComponent<StealableItem>();
-
-        stolenObjects.Add(currentItemToSteal);
-
         Destroy(currentItemToSteal);
         GameManager.Instance.AddWeightOnBar(item.Weight);
         GameManager.Instance.AddGoldValue(item.PriceValue);
@@ -156,8 +152,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        var colliders =  Physics.OverlapSphere(transform.position, 1.5f);
-        foreach(var hit in colliders)
+        var colliders = Physics.OverlapSphere(transform.position, 1.5f);
+        foreach (var hit in colliders)
         {
             if (hit.transform.gameObject.tag == "Stealable")
             {
@@ -205,6 +201,11 @@ public class PlayerController : MonoBehaviour
             this.gameObject.tag = "StrawWithPlayer";
             strawRef.tag = "StrawWithPlayer";
             playerSkills.OnInteractWithStraw(strawRef);
+        }
+        else if (other.CompareTag("Exit"))
+        {
+            GameManager.Instance.OnExit();
+            playerInput.CharacterController.Disable();
         }
     }
     private void OnTriggerExit(Collider other)
