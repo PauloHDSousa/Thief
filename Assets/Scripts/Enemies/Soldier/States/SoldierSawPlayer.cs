@@ -25,7 +25,6 @@ public class SoldierSawPlayer : SoldierBaseState
         {
             elapsedTime = 0f;
             soldier.SwitchState(soldier.soldierFollow);
-            
         }
 
     }

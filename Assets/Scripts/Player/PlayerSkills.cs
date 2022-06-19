@@ -242,8 +242,8 @@ public class PlayerSkills : MonoBehaviour
     #region Hide
     public void OnInteractWithStraw(GameObject straw)
     {
-        var StrawVFXPosition = straw.gameObject.transform.GetChild(0);
-        Instantiate(strawMoveEffect, StrawVFXPosition.transform);
+        //var StrawVFXPosition = straw.gameObject.transform.GetChild(0);
+        //Instantiate(strawMoveEffect, StrawVFXPosition.transform);
         audioSource.PlayOneShot(onEnterLeaveStrawSFX);
     }
     #endregion
