@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     AudioSource emergencyAudioPlayer;
 
+
+
     [SerializeField]
     AudioClip showMenuSFX;
 
@@ -34,6 +36,9 @@ public class GameManager : MonoBehaviour
     AudioClip mainSong;
     [SerializeField]
     AudioClip runSong;
+    [SerializeField]
+    AudioClip finishedMapSong;
+
 
     [Space(10)]
     [Header("UI Texts")]
@@ -52,8 +57,11 @@ public class GameManager : MonoBehaviour
     bool runSongIsPlaying = false;
 
     public int timesPLayerSeenByGuards = 0;
+    public int itensStolen = 0;
+
     private void Awake()
     {
+        Time.timeScale = 1f;
         Instance = this;
     }
 
@@ -75,12 +83,16 @@ public class GameManager : MonoBehaviour
     }
 
     #region MENU/PAUSE
-    public void ShowMenu()
+    public void ShowMenuOnPause()
     {
         TogglePause();
-
         audioSource.PlayOneShot(showMenuSFX);
         panelGameOver.SetActive(isPaused);
+    }
+
+    public void ShowMenuAfterDeath()
+    {
+        panelGameOver.SetActive(true);
     }
 
     void TogglePause()
@@ -99,11 +111,15 @@ public class GameManager : MonoBehaviour
 
     public void OnExit()
     {
-        mapTimeText.text = "";
-        timesSeenByGuardsText.text = "";
-        itensStolenText.text = "";
-        totalGoldStolenText.text = "";
-
+        TogglePause();
+        StopRunSong();
+        audioSource.Stop();
+        audioSource.PlayOneShot(finishedMapSong);
+        //UI
+        mapTimeText.text = $"Map Time  {timerText.text}";
+        timesSeenByGuardsText.text = $"times seen by guards: {timesPLayerSeenByGuards}";
+        itensStolenText.text = $"itens stolen: {itensStolen}";
+        totalGoldStolenText.text = $"Total Gold stolen: {goldText.text.Split(" ")[0]}";
 
         audioSource.PlayOneShot(showMenuSFX);
         panelExitMap.SetActive(true);
@@ -113,6 +129,12 @@ public class GameManager : MonoBehaviour
     {
         if (currentLevel == "Tutorial")
             currentLevel = "1-Map";
+        else
+        {
+            string[] currentLevelSplited = currentLevel.Split('-');
+            int levelNumber = int.Parse(currentLevelSplited[0]);
+            currentLevel = $"{levelNumber + 1}-{currentLevelSplited[1]}";
+        }
 
         SceneManager.LoadScene(currentLevel);
     }
@@ -136,15 +158,6 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region UI
-    public void AddWeightOnBar(float weight)
-    {
-        //if (weightBar.transform.localScale.x >= 1)
-        //    return;
-
-        //float nexWeight = weightBar.transform.localScale.x + weight;
-        //LeanTween.scaleX(weightBar, nexWeight, .6f);
-    }
-
     public void AddGoldValue(int gold)
     {
         string[] currentGoldValue = goldText.text.Split(" ");
@@ -153,4 +166,6 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
+
 }
+
