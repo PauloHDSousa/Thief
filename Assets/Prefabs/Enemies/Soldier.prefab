@@ -1168,14 +1168,12 @@ MonoBehaviour:
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  moveSpeed: 2
+  moveSpeed: 3
   rangeOfView: 5
   rangeOfViewBehind: 2
   rangeOfViewSideways: 3
   rangeOfSoundHeard: 6
-  runSpeed: 4
+  runSpeed: 5
   rangeOfViewWhileFollowing: 2
   playerObject: {fileID: 0}
   currentPoint: 0
@@ -1265,7 +1263,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 25
+  MaxDistance: 21
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0

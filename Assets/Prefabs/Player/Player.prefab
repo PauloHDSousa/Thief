@@ -1292,7 +1292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eae1bdb41906774a9b8a8eb7a4b4de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 3.5
   steps:
   - {fileID: 8300000, guid: 4d11813f5983ce047873c94858e6a6c1, type: 3}
   - {fileID: 8300000, guid: 6154d2d90f91ac743a30a16a58f9fa32, type: 3}
@@ -1315,11 +1315,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c92fd58ac6b91794ba82b93ef3f4e00e, type: 3}
   - {fileID: 8300000, guid: a70895712392d4345be385abfae08f28, type: 3}
   - {fileID: 8300000, guid: b70d04f1f7e251b4f8629b271d71c623, type: 3}
+  bloodParticle: {fileID: 19800000, guid: bc98890f6028f444eaa7789bde5e2eeb, type: 3}
   die_sfxs:
   - {fileID: 8300000, guid: 82b02a0c9f5ea2c48aa51b8536e7487e, type: 3}
   - {fileID: 8300000, guid: e1d1f5b7419fe744ca3b507c6908237d, type: 3}
   - {fileID: 8300000, guid: d4a12f3f6f76d9441916c4f1e5163fe6, type: 3}
   - {fileID: 8300000, guid: 1feb69a52c032654183228cccf8cde76, type: 3}
+  onStolenItem: {fileID: 8300000, guid: f42651eebe4987d4c8a70f616248b239, type: 3}
 --- !u!114 &2404518641514851744
 MonoBehaviour:
   m_ObjectHideFlags: 0

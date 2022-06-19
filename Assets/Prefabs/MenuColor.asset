@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d21f6ece3b46479f0c328f8c6007e0, type: 3}
+  m_Name: MenuColor
+  m_EditorClassIdentifier: 
+  colorMode: 3
+  topLeft: {r: 0.83137256, g: 0.7607843, b: 0.27450982, a: 1}
+  topRight: {r: 0.6698113, g: 0.62135106, b: 0.28751335, a: 1}
+  bottomLeft: {r: 0.5471698, g: 0.5101999, b: 0.25551796, a: 1}
+  bottomRight: {r: 0.54901963, g: 0.50980395, b: 0.25490198, a: 1}

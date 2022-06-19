@@ -24,10 +24,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     AudioClip[] steps;
 
+
+    [Space(10)]
+    [Header("VFX")]
+    [SerializeField]
+    ParticleSystem bloodParticle;
+
     [Space(10)]
     [Header("SFX")]
     [SerializeField]
     AudioClip[] die_sfxs;
+    [SerializeField]
+    AudioClip onStolenItem;
+    
 
     //Straw
     GameObject strawRef;
@@ -80,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
     void onPause(InputAction.CallbackContext ctx)
     {
-        GameManager.Instance.ShowMenu();
+        GameManager.Instance.ShowMenuOnPause();
     }
 
     void onSteal(InputAction.CallbackContext ctx)
@@ -101,8 +110,9 @@ public class PlayerController : MonoBehaviour
     public void StealItemDuringAnimation()
     {
         var item = currentItemToSteal.GetComponent<StealableItem>();
+        audioSource.PlayOneShot(onStolenItem);
         Destroy(currentItemToSteal);
-        GameManager.Instance.AddWeightOnBar(item.Weight);
+        GameManager.Instance.itensStolen++;
         GameManager.Instance.AddGoldValue(item.PriceValue);
         isUsingSkill = false;
     }
@@ -229,13 +239,14 @@ public class PlayerController : MonoBehaviour
         if (isDead)
             return;
 
+        Instantiate(bloodParticle, transform);
         isDead = true;
         AudioClip die_sfx = GetRandomDeathSound();
         audioSource.PlayOneShot(die_sfx);
         animController.Die();
         this.gameObject.tag = "DeadPlayer";
         playerInput.CharacterController.Disable();
-        GameManager.Instance.ShowMenu();
+        GameManager.Instance.ShowMenuAfterDeath();
     }
 
     public void Step()

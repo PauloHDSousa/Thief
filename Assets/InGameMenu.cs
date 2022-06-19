@@ -33,7 +33,15 @@ public class InGameMenu : MonoBehaviour
     void LoadScene(string scene)
     {
         Time.timeScale = 1f;
+        audioSource.PlayOneShot(onClickSound);
         SceneManager.LoadScene(scene);
     }
 
+
+    #region MainMenu
+    public void Play()
+    {
+        LoadScene("Tutorial");
+    }
+    #endregion
 }
