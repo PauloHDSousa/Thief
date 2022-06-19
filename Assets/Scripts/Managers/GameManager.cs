@@ -111,6 +111,12 @@ public class GameManager : MonoBehaviour
 
     public void OnExit()
     {
+        if(currentLevel == "Tutorial")
+        {
+            PlayerPrefsManager prefsManager = new PlayerPrefsManager();
+            prefsManager.SaveInt(PlayerPrefsManager.PrefKeys.PlayedTutorial, 1);
+        }
+
         TogglePause();
         StopRunSong();
         audioSource.Stop();
@@ -125,6 +131,11 @@ public class GameManager : MonoBehaviour
         panelExitMap.SetActive(true);
     }
 
+    public void GoToMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Menu");
+    }
     public void GoToNextLevel()
     {
         if (currentLevel == "Tutorial")

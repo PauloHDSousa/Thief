@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     AudioClip[] die_sfxs;
     [SerializeField]
     AudioClip onStolenItem;
-    
+
 
     //Straw
     GameObject strawRef;
@@ -51,11 +51,6 @@ public class PlayerController : MonoBehaviour
     bool canSteal = false;
     GameObject currentItemToSteal;
     #region Input Actions
-
-    void OnGUI()
-    {
-        GUI.Label(new Rect(0, 0, 100, 100), ((int)(1.0f / Time.smoothDeltaTime)).ToString());
-    }
 
     private void Awake()
     {
@@ -119,11 +114,14 @@ public class PlayerController : MonoBehaviour
 
     void onWhistle(InputAction.CallbackContext ctx)
     {
-        isUsingSkill = true;
-        playerSkills.OnWhistle();
+        if (!isUsingSkill)
+        {
+            isUsingSkill = true;
+            playerSkills.OnWhistle();
+        }
     }
 
-    void onWhistleFinished()
+    public void onWhistleAnimationFinished()
     {
         isUsingSkill = false;
     }
