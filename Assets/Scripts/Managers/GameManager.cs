@@ -111,11 +111,10 @@ public class GameManager : MonoBehaviour
 
     public void OnExit()
     {
-        if(currentLevel == "Tutorial")
-        {
-            PlayerPrefsManager prefsManager = new PlayerPrefsManager();
+        PlayerPrefsManager prefsManager = new PlayerPrefsManager();
+        
+        if (currentLevel == "Tutorial")
             prefsManager.SaveInt(PlayerPrefsManager.PrefKeys.PlayedTutorial, 1);
-        }
 
         TogglePause();
         StopRunSong();
@@ -125,7 +124,15 @@ public class GameManager : MonoBehaviour
         mapTimeText.text = $"Map Time  {timerText.text}";
         timesSeenByGuardsText.text = $"times seen by guards: {timesPLayerSeenByGuards}";
         itensStolenText.text = $"itens stolen: {itensStolen}";
-        totalGoldStolenText.text = $"Total Gold stolen: {goldText.text.Split(" ")[0]}";
+
+        string goldStolen = goldText.text.Split(" ")[0];
+
+        totalGoldStolenText.text = $"Total Gold stolen: {goldStolen}";
+
+        prefsManager.IncrementInt(PlayerPrefsManager.PrefKeys.GoldStolen, int.Parse(goldStolen));
+        prefsManager.IncrementInt(PlayerPrefsManager.PrefKeys.SawByGuards, timesPLayerSeenByGuards);
+        prefsManager.IncrementInt(PlayerPrefsManager.PrefKeys.ItensStolen, itensStolen);
+
 
         audioSource.PlayOneShot(showMenuSFX);
         panelExitMap.SetActive(true);

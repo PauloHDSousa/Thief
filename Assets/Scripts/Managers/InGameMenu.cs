@@ -14,6 +14,8 @@ public class InGameMenu : MonoBehaviour
     GameObject mainMenuPanel;
     [SerializeField]
     GameObject optionsPanel;
+    [SerializeField]
+    GameObject statsPanel;
 
     [Space(10)]
     [Header("SFX")]
@@ -25,6 +27,7 @@ public class InGameMenu : MonoBehaviour
     AudioSource audioSource;
 
     bool showOptions = false;
+    bool showStats = false;
     PlayerPrefsManager prefsManager = new PlayerPrefsManager();
 
     void Start()
@@ -82,6 +85,14 @@ public class InGameMenu : MonoBehaviour
         showOptions = !showOptions;
         optionsPanel.SetActive(showOptions);
         mainMenuPanel.SetActive(!showOptions);
+    }
+
+
+    public void ToggleStats()
+    {
+        showStats = !showStats;
+        statsPanel.SetActive(showStats);
+        mainMenuPanel.SetActive(!showStats);
     }
 
     public void Exit()
