@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerPrefsManager 
+public class PlayerPrefsManager
 {
     //I'm not sure if this class was necessary, BUT I did it anyway.
     #region Keys
@@ -9,6 +9,10 @@ public class PlayerPrefsManager
     {
         Volume,
         PlayedTutorial,
+        GoldStolen,
+        SawByGuards,
+        TransformedInABox,
+        ItensStolen
     }
     #endregion
 
@@ -38,7 +42,7 @@ public class PlayerPrefsManager
 
     public float GetFloat(PrefKeys key)
     {
-       return PlayerPrefs.GetFloat(key.ToString());
+        return PlayerPrefs.GetFloat(key.ToString());
     }
 
     public int GetInt(PrefKeys key)
@@ -50,5 +54,19 @@ public class PlayerPrefsManager
     {
         return PlayerPrefs.GetString(key.ToString());
     }
+    #endregion
+
+
+    #region Increment
+    public int IncrementInt(PrefKeys key, int value)
+    {
+        int currentValue = GetInt(key);
+        int newValue = currentValue + value;
+
+        PlayerPrefs.SetInt(key.ToString(), newValue);
+
+        return newValue;
+    }
+
     #endregion
 }

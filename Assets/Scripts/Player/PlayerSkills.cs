@@ -207,6 +207,9 @@ public class PlayerSkills : MonoBehaviour
         if (turnIntoBoxCountDownUI > 0)
             return;
 
+        PlayerPrefsManager prefsManager = new PlayerPrefsManager();
+        prefsManager.IncrementInt(PlayerPrefsManager.PrefKeys.TransformedInABox, 1);
+
 
         collider.enabled = false;
         rb.isKinematic = true;

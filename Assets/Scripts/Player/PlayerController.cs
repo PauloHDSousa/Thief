@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
             if (currentItemToSteal != null)
             {
                 isUsingSkill = true;
-                Vector3 objectPosition = new Vector3(currentItemToSteal.gameObject.transform.position.x, 0, currentItemToSteal.gameObject.transform.position.z);
+                Vector3 objectPosition = new Vector3(currentItemToSteal.gameObject.transform.position.x, transform.position.y, currentItemToSteal.gameObject.transform.position.z);
                 transform.LookAt(objectPosition);
                 animController.Steal();
             }
