@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -52,6 +54,14 @@ public class GameManager : MonoBehaviour
     TextMeshProUGUI totalGoldStolenText;
 
 
+    [Space(10)]
+    [Header("Loading")]
+    [SerializeField]
+    GameObject loadingPanel;
+    [SerializeField]
+    Slider loadingSlider;
+
+
     AudioSource audioSource;
     string currentLevel;
     bool runSongIsPlaying = false;
@@ -74,7 +84,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (isPaused)
+        if (isPaused || timerText == null)
             return;
 
         currentTime = currentTime + Time.deltaTime;
@@ -106,7 +116,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetLevel()
     {
-        SceneManager.LoadScene(currentLevel);
+        LoadLevel(currentLevel);
     }
 
     public void OnExit()
@@ -141,7 +151,7 @@ public class GameManager : MonoBehaviour
     public void GoToMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Menu");
+        LoadLevel("Menu");
     }
     public void GoToNextLevel()
     {
@@ -154,7 +164,27 @@ public class GameManager : MonoBehaviour
             currentLevel = $"{levelNumber + 1}-{currentLevelSplited[1]}";
         }
 
-        SceneManager.LoadScene(currentLevel);
+        LoadLevel(currentLevel);
+    }
+
+    public void LoadLevel(string scene)
+    {
+      StartCoroutine(LoadAsync(scene));
+    }
+
+    IEnumerator LoadAsync(string scene)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
+
+        loadingPanel.SetActive(true);
+        while (!operation.isDone)
+        {
+
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            loadingSlider.value = progress;
+            
+            yield return null;
+        }
     }
     #endregion
 

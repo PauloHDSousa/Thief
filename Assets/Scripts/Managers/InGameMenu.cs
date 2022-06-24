@@ -40,7 +40,7 @@ public class InGameMenu : MonoBehaviour
 
     public void Restart()
     {
-        LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.Instance.LoadLevel(SceneManager.GetActiveScene().name);
     }
 
     public void GoToNextLevel()
@@ -57,7 +57,7 @@ public class InGameMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         audioSource.PlayOneShot(onClickSound);
-        SceneManager.LoadScene(scene);
+        GameManager.Instance.LoadLevel(scene);
     }
 
     public void OnHoverSound()
