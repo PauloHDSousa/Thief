@@ -190,6 +190,8 @@ MonoBehaviour:
   timesSeenByGuardsText: {fileID: 3507239075923726378}
   itensStolenText: {fileID: 3507239074598091194}
   totalGoldStolenText: {fileID: 3507239074115897088}
+  loadingPanel: {fileID: 0}
+  loadingSlider: {fileID: 0}
   timesPLayerSeenByGuards: 0
   itensStolen: 0
   isPaused: 0

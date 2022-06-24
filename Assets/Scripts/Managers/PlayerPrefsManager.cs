@@ -56,7 +56,6 @@ public class PlayerPrefsManager
     }
     #endregion
 
-
     #region Increment
     public int IncrementInt(PrefKeys key, int value)
     {

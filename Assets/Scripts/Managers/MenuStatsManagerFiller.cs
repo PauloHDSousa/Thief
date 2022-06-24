@@ -29,7 +29,7 @@ public class MenuStatsManagerFiller : MonoBehaviour
 
 
         int transformedInABox = prefsManager.GetInt(PlayerPrefsManager.PrefKeys.TransformedInABox);
-        tmpGoldStolen.text = $"Times transformed in a box: {transformedInABox}";
+        tmptransformedInABox.text = $"Times transformed in a box: {transformedInABox}";
       
         int stolenItens = prefsManager.GetInt(PlayerPrefsManager.PrefKeys.ItensStolen);
         tmpItensStolen.text = $"Number of itens stolen: {stolenItens}";
