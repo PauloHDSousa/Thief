@@ -1,9 +1,7 @@
-# Thief
-
 <h3>Thief is a Top Down 3D Stealth Game, highly inspired by Metal Gear Solid and Assasins Creed.</h3>
 
-<iframe frameborder="0" src="https://itch.io/embed/1573788?bg_color=000000&amp;fg_color=ffffff&amp;link_color=e33d20&amp;border_color=80610e" width="552" height="167"><a href="https://paulohdsousa.itch.io/thief">Thief by PauloHDSousa</a></iframe>
-
+<p>In Thief you play as a skilled thief woman that is inside a castle trying to steal as many valuable items as possible</p>
+<p>You can play it by <a href="https://paulohdsousa.itch.io/thief" target="_blank">clicking here</a> and fell free to leave feedbacks</p>
 <div align="center" valign="top">
   <img src="https://img.itch.zone/aW1hZ2UvMTU3Mzc4OC85MjcyOTk4LnBuZw==/250x600/B2W2lP.png"/>
   <img src="https://img.itch.zone/aW1hZ2UvMTU3Mzc4OC85MjcyOTk5LnBuZw==/250x600/ZCslYu.png"/>
@@ -13,14 +11,10 @@
   <img src="https://img.itch.zone/aW1hZ2UvMTU3Mzc4OC85MjczMDExLnBuZw==/250x600/iX0ITH.png"/>
 </div>
 
-<div align="center" valign="top">
-  <b> You can use 3 skills to pass through guards </b>
-  <ul>
-    <li>You can transform yourself into a box<li>
-    <li>You can whistle to call the guards attention<li>
-    <li>You can see through walls<li>
-  </ul>
-  <img src="https://github.com/PauloHDSousa/Thief/blob/main/Assets/UI/box_1.png"/>
-</div>
-  
-
+<p>through this project I learned:</p>
+<ul>
+  <li>A better way to detect gameobject with raycast<li>
+  <li>Create an enemy IA with states (Idle, Patrol, Follow, Alert, Attack)<li>
+  <li>How to design game levels with a static following camera</li>
+  <li>Use the new Input System</li>
+</ul>
