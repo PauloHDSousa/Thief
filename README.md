@@ -11,9 +11,10 @@
   <img src="https://img.itch.zone/aW1hZ2UvMTU3Mzc4OC85MjczMDExLnBuZw==/250x600/iX0ITH.png"/>
 </div>
 
-<p>through this project I learned:</p>
+<p>Through this project I learned:</p>
 <ul>
-  <li>A better way to detect gameobject with raycast</li>
+  <li>The principles of design a stealth game (get information, Analise and then execute)<li>
+  <li>A better way to detect gameobject with multiples raycast</li>
   <li>Create an enemy IA with states (Idle, Patrol, Follow, Alert, Attack)</li>
   <li>How to design game levels with a static following camera</li>
   <li>Use the new Input System</li>
