@@ -7,6 +7,8 @@ Thief is a Top Down 3D Stealth Game, highly inspired by Metal Gear Solid and Ass
 <img src="https://img.itch.zone/aW1hZ2UvMTU3Mzc4OC85MjcyOTk5LnBuZw==/250x600/ZCslYu.png"/>
 <img src="https://img.itch.zone/aW1hZ2UvMTU3Mzc4OC85MjQwNTAwLnBuZw==/250x600/bk%2FmYq.png"/>
 <img src="https://img.itch.zone/aW1hZ2UvMTU3Mzc4OC85MjczMDUxLnBuZw==/250x600/%2Biw4UL.png"/> 
+<img src="https://img.itch.zone/aW1hZ2UvMTU3Mzc4OC85MjQwNDgyLnBuZw==/250x600/GPKunO.png"/>
+<img src="https://img.itch.zone/aW1hZ2UvMTU3Mzc4OC85MjczMDExLnBuZw==/250x600/iX0ITH.png"/>
 </div>
   
 
