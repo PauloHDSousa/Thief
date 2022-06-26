@@ -13,8 +13,8 @@
 
 <p>through this project I learned:</p>
 <ul>
-  <li>A better way to detect gameobject with raycast<li>
-  <li>Create an enemy IA with states (Idle, Patrol, Follow, Alert, Attack)<li>
+  <li>A better way to detect gameobject with raycast</li>
+  <li>Create an enemy IA with states (Idle, Patrol, Follow, Alert, Attack)</li>
   <li>How to design game levels with a static following camera</li>
   <li>Use the new Input System</li>
 </ul>
